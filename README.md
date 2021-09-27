@@ -273,3 +273,54 @@ Create a signle component called `Joke` in the components which can be looped ov
 ## Create Details page
 
 We saw a list page with `pages/jokes/index.vue` to display a list of all jokes on a page. Now to access the details of a signle item from that list, we need to create `_id/index.vue` inside the `pages/jokes` and we fetch the resource for a single joke with axios.
+
+
+**************************************
+
+## Search
+
+Create a new component called `SearchJokes`. This creates the basic form mark-up and emits `search-text` method to when `onSubmit` get triggered on user's submit action. This function also resets teh `this.test=''`.
+
+```
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
+  name: 'SearchJokes',
+  data() {
+    return {
+      text: ''
+    }
+  },
+  methods: {
+    onSubmit() {
+     this.$emit('search-text', this.text);
+     this.text = ''; 
+    }
+  }
+})
+</script>
+```
+
+On `pages/jokes/index.vue`, import and integerate `SearchJokes`. Then within methods, create a new async/await called `searchText()` and make another axios call with the serached text to update the results on the screen. 
+
+```
+<SearchJokes v-on:search-text="searchText" />
+
+
+  methods: {
+    async searchText(text) {
+      const config = {
+        headers: {
+          'Accept': 'application/json'
+        }
+      }
+      try {
+        const res = await this.$axios.get(`https://icanhazdadjoke.com/search?term=${text}`, config);
+        this.jokes = res.data.results;
+      } catch(err) {
+        console.log(err);
+      }
+    }
+  },
+```

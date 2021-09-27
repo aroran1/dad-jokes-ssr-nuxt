@@ -1,9 +1,10 @@
 <template>
   <div>
     <h1>Welcome to the best corny dad app on the web</h1>
-    <!-- <div>
+    <br />
+    <div>
       <Tutorial />
-    </div> -->
+    </div>
   </div>
 </template>
 
