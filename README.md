@@ -265,3 +265,11 @@ async created() {
     }
   },
 ```
+
+Create a signle component called `Joke` in the components which can be looped over to create the list.
+
+**************************************
+
+## Create Details page
+
+We saw a list page with `pages/jokes/index.vue` to display a list of all jokes on a page. Now to access the details of a signle item from that list, we need to create `_id/index.vue` inside the `pages/jokes` and we fetch the resource for a single joke with axios.
