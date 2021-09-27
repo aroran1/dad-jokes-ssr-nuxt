@@ -1,9 +1,7 @@
 <template>
   <div>
-    <h1>Welcome to the best corny dad app on the web</h1>
-    <!-- <div>
-      <Tutorial />
-    </div> -->
+    <h1>About Dad Jokes</h1>
+    <p>This is an app that displays corny Dad Jokes.</p>
   </div>
 </template>
 
@@ -13,12 +11,12 @@ import Vue from 'vue'
 export default Vue.extend({
   head() {
     return {
-      title: 'Welcome to the best corny dad app',
+      title: 'About The App',
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: 'Welcome to the best corny dad app'
+          content: 'Best place for corny dad joked'
         }
       ]
     }

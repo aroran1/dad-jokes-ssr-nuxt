@@ -21,6 +21,113 @@ With nuxt in place you don't have to configure the routing explicitly. Instead i
 - Automatic code-splittling, Babel transpile, minification, HMR, Sass integration
 - Easy build `nuxt generate` creates dist folder for deployment
 
+## Config settings
+`npx create-nuxt-app <project-name>` <br />
+? Project name: (nuxt-test) <br />
+? Programming language: (Use arrow keys) <br />
+  ❯ ◯ JavaScript <br />
+    ◯ TypeScript <br />
+? Package manager: (Use arrow keys) <br />
+  ❯ ◯ Yarn <br />
+    ◯ Npm <br />
+UI framework: (Use arrow keys) <br />
+  ❯ ◯ None <br />
+    ◯ Ant Design Vue <br />
+    ◯ BalmUI <br />
+    ◯ Bootstrap Vue <br />
+    ◯ Buefy <br />
+    ◯ Chakra UI <br />
+    ◯ Element <br />
+    ◯ Framevuerk <br />
+    ◯ Oruga <br />
+    ◯ Tachyons <br />
+    ◯ Tailwind CSS <br />
+    ◯ Windi CSS <br />
+    ◯ Vant <br />
+    ◯ View UI <br />
+    ◯ Vuetify.js<br />
+? Nuxt.js modules: (Press <space> to select, <a> to toggle all, <i> to invert selection) <br />
+  ❯ ◯ Axios - Promise based HTTP client <br />
+    ◯ Progressive Web App (PWA) <br />
+    ◯ Content - Git-based headless CMS <br />
+? Linting tools: (Press <space> to select, <a> to toggle all, <i> to invert selection) <br />
+  ❯ ◯ ESLint <br />
+    ◯ Prettier <br />
+    ◯ Lint staged files <br />
+    ◯ StyleLint <br />
+    ◯ Commitlint <br />
+? Testing framework: (Use arrow keys) <br />
+  ❯ ◯ None <br />
+    ◯ Jest <br />
+    ◯ AVA <br />
+    ◯ WebdriverIO <br />
+    ◯ Nightwatch <br />
+? Rendering mode: (Use arrow keys) <br />
+  ❯ ◯ Universal (SSR / SSG) <br />
+    ◯ Single Page App <br />
+? Deployment target: (Use arrow keys) <br />
+  ❯ ◯ Server (Node.js hosting) <br />
+    ◯ Static (Static/Jamstack hosting) <br />
+? Development tools: (Press <space> to select, <a> to toggle all, <i> to invert selection) <br />
+  ❯ ◯ jsconfig.json (Recommended for VS Code if you're not using typescript) <br />
+    ◯ Semantic Pull Requests <br />
+    ◯ Dependabot (For auto-updating dependencies, GitHub only) <br />
+? Continuous integration: (Use arrow keys) <br />
+  ❯ ◯ None <br />
+    ◯ GitHub Actions (GitHub only) <br />
+    ◯ Travis CI <br />
+    ◯ CircleCI <br />
+? Version control system: (Use arrow keys) <br />
+  ❯ ◯ Git <br />
+    ◯ None <br />
+
+Sample Package.json
+```
+{
+  "name": "nuxt-test",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "test": "jest"
+  },
+  "dependencies": {
+    "core-js": "^3.15.1",
+    "nuxt": "^2.15.7"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "^1.2.1",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^27.0.5",
+    "jest": "^27.0.5",
+    "vue-jest": "^3.0.4"
+  }
+}
+```
+
+Scripts
+```
+ To get started:
+
+	cd nuxt-test
+	yarn dev
+
+  To build & start for production:
+
+	cd nuxt-test
+	yarn build
+	yarn start
+
+  To test:
+
+	cd nuxt-test
+	yarn test
+```
+
+
 Docs - https://nuxtjs.org/
 
 API - https://icanhazdadjoke.com/api
@@ -98,3 +205,63 @@ More information about the usage of this directory in [the documentation](https:
 
 
 **************************************
+
+## About Page
+Add a new page to pages folder as `about.vue`, it will automatically craete a new route for your project on `http://localhost:3000/about`. You can also Meta details for this page as below or dynamicall by passing `this.xxx`.
+
+```
+<template>
+  <div>
+    <h1>About Dad Jokes</h1>
+    <p>This is an app that displays corny Dad Jokes.</p>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
+  head() {
+    return {
+      title: 'About The App',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Best place for corny dad joked'
+        }
+      ]
+    }
+  }
+})
+```
+
+
+**************************************
+
+## AppHeader
+Create a common component to be shared between all pages. Add the `layouts/default.vue`, if its missing by defualt to include AppHeader to it.
+
+
+**************************************
+
+## Axios
+
+https://www.smashingmagazine.com/2020/05/getting-started-axios-nuxt/
+Add `'@nuxtjs/axios',` to modules in `nuxt.config.js.`. Create an async/await method and use axios as `$this.$axios.get("<url>", "<headers>")`. Example on `pages/jokes/index.vue`
+
+```
+async created() {
+    const config = {
+      headers: {
+        'Accept': 'application/json'
+      }
+    }
+    try {
+      const res = await this.$axios.get('https://icanhazdadjoke.com/search?term=hipster', config);
+      console.log(res.data);
+    } catch(err) {
+      console.log(err);
+    }
+  },
+```
